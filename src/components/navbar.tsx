@@ -1,51 +1,43 @@
 "use client"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AiOutlineHome, AiOutlineUser, AiOutlinePlus } from "react-icons/ai";
 
 
-function Navbar() {
+export default function Navbar() {
   const pathname = usePathname();
   const navItems = [
-    { icon: "🏠", label: "Ana Səhifə", href: "/" },
-    { icon: "🌄", label: "Qarabağ", href: "/karabakh" },
-    { icon: "🗺️", label: "Turizm", href: "/tourism" },
-    { icon: "🍽️", label: "Mətbəx", href: "/cuisine" },
-    { icon: "🎉", label: "Mədəniyyət", href: "/culture" },
-    { icon: "📸", label: "Qalereya", href: "/gallery" },
+    { icon: <AiOutlineHome size={38} />, label: "Ana Səhifə", href: "/" },
+    { icon: <AiOutlineUser size={38} />, label: "User", href: "/account" },
   ];
 
   return (
     <nav
-      className="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-1 py-2 sm:py-3 shadow-2xl bg-gradient-to-br from-blue-50/90 via-white/90 to-blue-100/90 border-t border-blue-200 backdrop-blur-md"
-      style={{ WebkitBackdropFilter: 'blur(12px)', backdropFilter: 'blur(12px)' }}
+      className="fixed bottom-0 left-0 w-full z-50 flex items-end justify-center px-0 pb-2"
+      style={{ pointerEvents: 'none' }}
     >
-      {navItems.map((item) => {
-        const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-        return (
-          <Link key={item.href} href={item.href} className="flex-1 px-1">
-            <div
-              className={`flex flex-col items-center justify-center gap-0.5 py-1 rounded-xl transition-all duration-200 ease-in-out
-                ${isActive
-                  ? "bg-gradient-to-br from-blue-400/90 to-blue-600/50 text-white shadow-lg scale-105 ring-2 ring-blue-300/60"
-                  : "bg-white/70 hover:bg-blue-100/80 text-blue-500 hover:scale-105 hover:shadow-md"}
-              `}
-              style={{ minWidth: 0 }}
-            >
+      {/* Arka plan */}
+      <div className="absolute bottom-0 left-0 w-full h-16 bg-[#5C7D41] rounded-t-2xl z-[-1]" style={{ boxShadow: '0 -2px 16px 0 #0002' }} />
+      <div className="w-full max-w-md mx-auto flex items-end justify-between px-8">
+        {navItems.map((item, idx) => {
+          const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+          return (
+            <Link key={item.href} href={item.href} className="flex flex-col items-center flex-1" style={{ pointerEvents: 'auto' }}>
               <span
-                className={`text-lg sm:text-xl leading-none mb-0.5 drop-shadow-md transition-transform duration-200 ${isActive ? "scale-110" : ""}`}
-                style={{ filter: isActive ? "drop-shadow(0 2px 8px #3b82f6aa)" : undefined }}
+                className={`mb-1 transition-all duration-200 ${isActive ? "text-white" : "text-white/80"}`}
+                style={isActive
+                  ? {
+                      filter:
+                        "drop-shadow(0 0 24px #fff) drop-shadow(0 0 24px #fff) drop-shadow(0 0 64px #fff) drop-shadow(0 0 96px #fff) brightness(2.5)"
+                    }
+                  : {}}
               >
                 {item.icon}
               </span>
-              <span className="text-[9px] sm:text-[11px] font-medium tracking-wide leading-none drop-shadow-sm">
-                {item.label}
-              </span>
-            </div>
-          </Link>
-        );
-      })}
+            </Link>
+          );
+        })}
+      </div>
     </nav>
   );
 }
-
-export default Navbar;
