@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useUserStore } from "@/store/userStore";
 import { AiOutlineHome, AiOutlineUser, AiOutlinePlus } from "react-icons/ai";
 
 
@@ -12,14 +13,12 @@ export default function Navbar() {
     { icon: <AiOutlineUser size={38} />, label: "User", href: "/account" },
   ];
   const [showNavbar, setShowNavbar] = useState(false);
-  const {confirmed} = useParams();
+  const { confirmed } = useParams();
+  const notFirstLogin = useUserStore((state) => state.notFirstLogin);
 
   useEffect(() => {
-    const notFirstLogin = localStorage.getItem("notfirstlogin");
-    if (notFirstLogin === "true") {
-      setShowNavbar(true);
-    }
-  }, [confirmed]);
+    setShowNavbar(notFirstLogin);
+  }, [notFirstLogin, confirmed]);
 
   return (
     <nav

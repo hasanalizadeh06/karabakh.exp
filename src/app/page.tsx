@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useUserStore } from "@/store/userStore";
 import Places from "@/components/places";
 import Comments from "@/components/comments";
 import Experience from "@/components/experience";
@@ -42,24 +43,17 @@ function TabSection({ activeTab, setActiveTab }: TabSectionProps) {
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("places");
-  const [showWelcome, setShowWelcome] = useState(false);
+  const notFirstLogin = useUserStore((state) => state.notFirstLogin);
+  const setNotFirstLogin = useUserStore((state) => state.setNotFirstLogin);
+  const [showWelcome, setShowWelcome] = useState(!notFirstLogin);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const notFirstLogin = localStorage.getItem("notfirstlogin");
-      if (notFirstLogin === "true") {
-        setShowWelcome(false);
-      } else {
-        setShowWelcome(true);
-      }
-    }
-  }, []);
+    setShowWelcome(!notFirstLogin);
+  }, [notFirstLogin]);
 
   const handleWelcomeContinue = () => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("notfirstlogin", "true");
-      setShowWelcome(false);
-    }
+    setNotFirstLogin(true);
+    setShowWelcome(false);
   };
 
   if (showWelcome) {
