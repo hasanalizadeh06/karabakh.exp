@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vibe Karabakh | Vibe with the Vibes of Karabakh",
-  description: "Qarabağın mahiyyətini Vibe Karabakh ilə kəşf edin - mədəniyyət, tarix və nəfəs kəsən mənzərələrə açılan qapınız.",
+  title: "Karabakh Exp | Discover the Essence of Karabakh",
+  description: "Qarabağın mahiyyətini Karabakh Exp ilə kəşf edin - mədəniyyət, tarix və nəfəs kəsən mənzərələrə açılan qapınız.",
 };
 
 export default function RootLayout({
