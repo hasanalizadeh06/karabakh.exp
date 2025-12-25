@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { AiOutlineHome, AiOutlineUser, AiOutlinePlus } from "react-icons/ai";
 
 
@@ -10,11 +11,22 @@ export default function Navbar() {
     { icon: <AiOutlineHome size={38} />, label: "Ana Səhifə", href: "/" },
     { icon: <AiOutlineUser size={38} />, label: "User", href: "/account" },
   ];
+  const [showNavbar, setShowNavbar] = useState(false);
+  const {confirmed} = useParams();
+
+  useEffect(() => {
+    const notFirstLogin = localStorage.getItem("notfirstlogin");
+    if (notFirstLogin === "true") {
+      setShowNavbar(true);
+    }
+  }, [confirmed]);
 
   return (
     <nav
       className="fixed bottom-0 left-0 w-full z-50 flex items-end justify-center px-0 pb-2"
-      style={{ pointerEvents: 'none' }}
+      style={{
+         pointerEvents: 'none', 
+      }}
     >
       {/* Arka plan */}
       <div className="absolute bottom-0 left-0 w-full h-16 bg-[#5C7D41] rounded-t-2xl z-[-1]" style={{ boxShadow: '0 -2px 16px 0 #0002' }} />
