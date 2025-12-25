@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen overflow`}
       >
         <Navbar />
-        <div className="relative min-h-full h-full z-10 w-full max-w-7xl mx-auto px-2 sm:px-4 md:px-8">{children}</div>
+        <div className="relative min-h-full h-full z-10 w-full max-w-7xl mx-auto sm:px-4 md:px-8">{children}</div>
       </body>
     </html>
   );

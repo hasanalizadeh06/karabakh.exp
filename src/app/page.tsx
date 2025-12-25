@@ -35,7 +35,7 @@ function TabSection({ activeTab, setActiveTab }: TabSectionProps) {
 export default function Home() {
   const [activeTab, setActiveTab] = useState("places");
   return (
-    <div className="w-full min-h-screen flex flex-col gap-4 pb-20 px-2 sm:px-4 md:px-8 lg:px-20 bg-white">
+    <div className="w-full min-h-screen px-2 flex flex-col gap-4 pb-20 px-2 sm:px-4 md:px-8 lg:px-20 bg-white">
       {/* Üst başlık ve filtre */}
       <div className="flex items-center justify-between mt-4 mb-2">
         <h1 className="text-2xl font-bold text-[#5C7D41]">Kəşf edin</h1>
